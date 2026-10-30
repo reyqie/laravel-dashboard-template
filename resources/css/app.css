@@ -1,0 +1,349 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../views/**/*.blade.php';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+    color-scheme: light;
+
+    --canvas: #f4f4f0;
+    --canvas-soft: #ededE7;
+    --surface: #ffffff;
+    --surface-2: #fafaf7;
+    --surface-3: #f2f2ed;
+    --ink: #111114;
+    --ink-soft: #3b3b42;
+    --muted: #71717a;
+    --faint: #a1a1aa;
+    --line: #e7e7df;
+    --line-strong: #d8d8ce;
+    --brand: #5b4cf5;
+    --brand-strong: #4a3be0;
+    --brand-soft: #eeebff;
+    --brand-ink: #352c9b;
+    --positive: #0c9463;
+    --positive-soft: #e4f6ee;
+    --negative: #dc2626;
+    --negative-soft: #fdeaea;
+    --warning: #b45309;
+    --warning-soft: #fdf0d5;
+    --info: #2557d6;
+    --info-soft: #e6ecff;
+    --chart-1: #5b4cf5;
+    --chart-2: #0c9463;
+    --chart-3: #e8a317;
+    --chart-4: #d9468f;
+    --chart-5: #3b82f6;
+    --grid-line: #ecece5;
+    --shadow-color: 24 24 30;
+}
+
+.dark {
+    color-scheme: dark;
+
+    --canvas: #08080a;
+    --canvas-soft: #0d0d10;
+    --surface: #121216;
+    --surface-2: #16161b;
+    --surface-3: #1d1d23;
+    --ink: #f4f4f2;
+    --ink-soft: #d6d6d9;
+    --muted: #92929c;
+    --faint: #6d6d78;
+    --line: #232329;
+    --line-strong: #33333c;
+    --brand: #8b7cff;
+    --brand-strong: #a396ff;
+    --brand-soft: #211c43;
+    --brand-ink: #cfc8ff;
+    --positive: #34d399;
+    --positive-soft: #10281f;
+    --negative: #f87171;
+    --negative-soft: #2d1515;
+    --warning: #fbbf24;
+    --warning-soft: #2c2209;
+    --info: #7aa2ff;
+    --info-soft: #131f3c;
+    --chart-1: #8b7cff;
+    --chart-2: #34d399;
+    --chart-3: #fbbf24;
+    --chart-4: #f472b6;
+    --chart-5: #60a5fa;
+    --grid-line: #1f1f26;
+    --shadow-color: 0 0 0;
+}
+
+@theme inline {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-serif: 'Instrument Serif', ui-serif, Georgia, Cambria, 'Times New Roman', serif;
+
+    --color-canvas: var(--canvas);
+    --color-canvas-soft: var(--canvas-soft);
+    --color-surface: var(--surface);
+    --color-surface-2: var(--surface-2);
+    --color-surface-3: var(--surface-3);
+    --color-ink: var(--ink);
+    --color-ink-soft: var(--ink-soft);
+    --color-muted: var(--muted);
+    --color-faint: var(--faint);
+    --color-line: var(--line);
+    --color-line-strong: var(--line-strong);
+    --color-brand: var(--brand);
+    --color-brand-strong: var(--brand-strong);
+    --color-brand-soft: var(--brand-soft);
+    --color-brand-ink: var(--brand-ink);
+    --color-positive: var(--positive);
+    --color-positive-soft: var(--positive-soft);
+    --color-negative: var(--negative);
+    --color-negative-soft: var(--negative-soft);
+    --color-warning: var(--warning);
+    --color-warning-soft: var(--warning-soft);
+    --color-info: var(--info);
+    --color-info-soft: var(--info-soft);
+
+    --shadow-card: 0 1px 2px rgb(var(--shadow-color) / 0.04), 0 16px 40px -24px rgb(var(--shadow-color) / 0.24);
+    --shadow-float: 0 1px 2px rgb(var(--shadow-color) / 0.05), 0 24px 60px -28px rgb(var(--shadow-color) / 0.35);
+    --shadow-pop: 0 12px 32px -12px rgb(var(--shadow-color) / 0.28), 0 2px 6px rgb(var(--shadow-color) / 0.08);
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+        background-color: var(--canvas);
+        color: var(--ink);
+        font-family: var(--font-sans);
+        font-feature-settings: 'cv11' on, 'ss01' on;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+    }
+
+    ::selection {
+        background-color: color-mix(in oklab, var(--brand) 24%, transparent);
+        color: var(--ink);
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--brand);
+        outline-offset: 2px;
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: color-mix(in oklab, var(--muted) 28%, transparent);
+        border-radius: 999px;
+        border: 3px solid transparent;
+        background-clip: content-box;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: color-mix(in oklab, var(--muted) 45%, transparent);
+        background-clip: content-box;
+        border: 3px solid transparent;
+    }
+}
+
+@layer components {
+    .tabular {
+        font-variant-numeric: tabular-nums;
+        font-feature-settings: 'tnum' on, 'cv11' on;
+    }
+
+    .bg-dots {
+        background-image: radial-gradient(color-mix(in oklab, var(--line-strong) 75%, transparent) 1px, transparent 1px);
+        background-size: 15px 15px;
+    }
+
+    .bg-noise {
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+    }
+
+    .text-gradient-brand {
+        background-image: linear-gradient(120deg, var(--brand) 0%, color-mix(in oklab, var(--chart-4) 70%, var(--brand)) 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    .ring-hairline {
+        box-shadow: inset 0 0 0 1px var(--line);
+    }
+
+    .theme-icon {
+        transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1), opacity 300ms ease;
+    }
+
+    .theme-icon-moon {
+        opacity: 0;
+        transform: rotate(-90deg) scale(0.55);
+    }
+
+    .dark .theme-icon-sun {
+        opacity: 0;
+        transform: rotate(90deg) scale(0.55);
+    }
+
+    .dark .theme-icon-moon {
+        opacity: 1;
+        transform: rotate(0deg) scale(1);
+    }
+
+    .seg-btn {
+        color: var(--muted);
+        transition: color 200ms ease, background-color 200ms ease, box-shadow 200ms ease;
+    }
+
+    .seg-btn:hover {
+        color: var(--ink);
+    }
+
+    .seg-btn.is-active {
+        background-color: var(--surface);
+        color: var(--ink);
+        box-shadow: inset 0 0 0 1px var(--line), 0 1px 2px rgb(var(--shadow-color) / 0.06);
+    }
+
+    .filter-tab {
+        color: var(--muted);
+        transition: color 200ms ease, background-color 200ms ease;
+    }
+
+    .filter-tab:hover {
+        color: var(--ink);
+    }
+
+    .filter-tab.is-active {
+        background-color: var(--ink);
+        color: var(--canvas);
+    }
+
+    .settings-tab {
+        color: var(--muted);
+        transition: color 200ms ease, background-color 200ms ease;
+    }
+
+    .settings-tab:hover {
+        color: var(--ink);
+        background-color: var(--surface-2);
+    }
+
+    .settings-tab.is-active {
+        background-color: var(--ink);
+        color: var(--canvas);
+    }
+
+    .settings-tab.is-active:hover {
+        background-color: var(--ink);
+        color: var(--canvas);
+    }
+
+    [data-theme-choice] {
+        transition: border-color 200ms ease, box-shadow 200ms ease, background-color 200ms ease;
+    }
+
+    [data-theme-choice] .theme-check {
+        opacity: 0;
+        transform: scale(0.7);
+        transition: opacity 200ms ease, transform 200ms ease;
+    }
+
+    [data-theme-choice].is-active {
+        border-color: var(--brand);
+        box-shadow: 0 0 0 3px color-mix(in oklab, var(--brand) 16%, transparent);
+    }
+
+    [data-theme-choice].is-active .theme-check {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 1023px) {
+    #sidebar.is-open {
+        translate: 0;
+    }
+}
+
+.apexcharts-canvas {
+    font-family: var(--font-sans) !important;
+}
+
+.apexcharts-tooltip.apexcharts-theme-light,
+.apexcharts-tooltip.apexcharts-theme-dark {
+    border: 1px solid var(--line) !important;
+    background: color-mix(in oklab, var(--surface) 92%, transparent) !important;
+    color: var(--ink) !important;
+    border-radius: 12px !important;
+    box-shadow: var(--shadow-pop) !important;
+    backdrop-filter: blur(12px);
+    overflow: hidden;
+}
+
+.apexcharts-tooltip-title {
+    background: transparent !important;
+    border-bottom: 1px solid var(--line) !important;
+    font-weight: 600 !important;
+    color: var(--ink) !important;
+    padding: 8px 12px !important;
+}
+
+.apexcharts-tooltip-series-group {
+    padding: 6px 12px 8px !important;
+}
+
+.apexcharts-xaxistooltip,
+.apexcharts-yaxistooltip {
+    background: var(--surface) !important;
+    border: 1px solid var(--line) !important;
+    color: var(--ink) !important;
+    border-radius: 8px !important;
+    box-shadow: var(--shadow-pop) !important;
+}
+
+.apexcharts-xaxistooltip-bottom::before,
+.apexcharts-xaxistooltip-bottom::after {
+    border-bottom-color: var(--line) !important;
+}
+
+.apexcharts-menu {
+    background: var(--surface) !important;
+    border: 1px solid var(--line) !important;
+    border-radius: 10px !important;
+    color: var(--ink) !important;
+}
+
+.apexcharts-legend-text {
+    color: var(--muted) !important;
+    font-family: var(--font-sans) !important;
+}
+
+.apexcharts-datalabels-group text {
+    fill: var(--ink) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}
