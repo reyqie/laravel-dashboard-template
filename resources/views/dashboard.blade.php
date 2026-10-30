@@ -65,7 +65,7 @@ $circumference = 2 * M_PI * 68;
                 </div>
 
                 <div id="revenueChart" data-chart="area" data-height="296" data-prefix="$" data-suffix="k"
-                    data-dash="0,5" data-labels='@json($revenue['labels'])' data-series='@json($revenue['series'])'
+                    data-dash="0,5" data-labels='@json($revenue[' labels'])' data-series='@json($revenue[' series'])'
                     data-colors='["--chart-1", "--chart-5"]' class="w-full"></div>
             </div>
         </x-card>
